@@ -32,3 +32,6 @@
 *.dSYM/
 *.su
 labirin_trap
+
+# TMP Files
+tmp/
