@@ -35,3 +35,4 @@ labirin_trap
 
 # TMP Files
 tmp/
+cmake-build-debug
