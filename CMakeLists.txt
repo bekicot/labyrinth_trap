@@ -4,7 +4,7 @@ project(labirin_trap)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        main.c menu.h menu.c)
+        main.c menu.h menu.c mapCreator/list.h mapCreator/list.c mapCreator/mapCreator.h mapCreator/mapCreator.c)
 
 add_executable(labirin_trap ${SOURCE_FILES})
 

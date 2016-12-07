@@ -6,7 +6,6 @@ void createEmptyMap(map *m, int lengthX, int widthX){
 	m->activePixel=NULL;
 	m->in=NULL;
 	m->out=NULL;
-	printf("\nPeta kosong telah disiapkan");
 }
 
 address createPixel(int X, int Y, address topX, address bottomX, address leftX, address rightX){
@@ -25,20 +24,16 @@ address createPixel(int X, int Y, address topX, address bottomX, address leftX, 
 
 void createIn(map *m, int X, int Y){
 	if(m->in!=NULL){
-		printf("!!! Pintu masuk telah tersedia sebelumnya\n");
 	}else{
 		if(X > m->length-1 || Y > m->width-1){
-			printf("!!! (x) atau (y) yang anda masukkan melebihi batas\n");
 		}else{
 			m->in=createPixel(X, Y, NULL, NULL, NULL, NULL);
-			printf("    Pintu masuk telah disiapkan\n");
 		}
 	}
 }
 
 void setOut(map *m, address outX){
 	if(outX == NULL){
-		printf("!!! Pixel yang dimaksud tidak ditemukan dalam peta\n");
 	}else{
 		m->out=outX;
 	}
@@ -50,14 +45,11 @@ void connect(address a, address b){
 			if(a->position.y == b->position.y-1){
 				a->top=b;
 				b->bottom=a;
-				printf("    pixel-a dan pixel-b berhasil dihubungkan\n");
 			}else{
 				if(a->position.y == b->position.y+1){
 					a->bottom=b;
 					b->top=a;
-					printf("    pixel-a dan pixel-b berhasil dihubungkan\n");
 				}else{
-					printf("!!! pixel-a dan pixel-b tidak berdampingan\n");
 				}
 			}
 		}else{
@@ -65,26 +57,20 @@ void connect(address a, address b){
 				if(a->position.x == b->position.x-1){
 					a->right=b;
 					b->left=a;
-					printf("    pixel-a dan pixel-b berhasil dihubungkan\n");
 				}else{
 					if(a->position.x == b->position.x+1){
 						a->left=b;
 						b->right=a;
-						printf("    pixel-a dan pixel-b berhasil dihubungkan\n");
 					}else{
-						printf("!!! pixel-a dan pixel-b tidak berdampingan\n");
 					}
 				}
 			}else{
-				printf("!!! pixel-a dan pixel-b tidak berdampingan\n");
 			}
 		}
 	}else{
 		if(a == NULL){
-			printf("!!! pixel-a tidak ada\n");
 		}
 		if(b == NULL){
-			printf("!!! pixel-b tidak ada\n");
 		}
 	}
 }
@@ -202,19 +188,14 @@ address pixelSearch(list *sudahDilewati, address pixel, int x, int y) {
 
 void addTop(map *m, int Xpredessor, int Ypredessor){
 	if(m->in==NULL){
-		printf("!!! Peta masih kosong (tidak terdapat pixel predessor)\n");
 	}else{
 		if(Ypredessor == m->width-1){
-			printf("!!! Tidak memungkinkan dilakukan penambahan di atas predessor\n");
 		}else{
 			if(search(*m,Xpredessor, Ypredessor)==NULL){
-				printf("!!! Predessor yang dimaksud tidak ada dalam peta\n");
 			}else{
 				if(search(*m,Xpredessor, Ypredessor+1)!=NULL){
-					printf("!!! Telah terdapat pixel di atas predessor\n");
 				}else{
 					search(*m,Xpredessor, Ypredessor)->top=createPixel(Xpredessor, Ypredessor+1, NULL, search(*m,Xpredessor, Ypredessor), NULL, NULL);
-					printf("    Penambahan berhasil dilakukan\n");
 				}
 			}
 		}
@@ -223,19 +204,14 @@ void addTop(map *m, int Xpredessor, int Ypredessor){
 
 void addBottom(map *m, int Xpredessor, int Ypredessor){
 	if(m->in==NULL){
-		printf("!!! Peta masih kosong (tidak terdapat pixel predessor)\n");
 	}else{
 		if(Ypredessor == 0){
-			printf("!!! Tidak memungkinkan dilakukan penambahan di atas predessor\n");
 		}else{
 			if(search(*m,Xpredessor, Ypredessor)==NULL){
-				printf("!!! Predessor yang dimaksud tidak ada dalam peta\n");
 			}else{
 				if(search(*m,Xpredessor, Ypredessor-1)!=NULL){
-					printf("!!! Telah terdapat pixel di bawah predessor\n");
 				}else{
 					search(*m,Xpredessor, Ypredessor)->bottom=createPixel(Xpredessor, Ypredessor-1, search(*m,Xpredessor, Ypredessor), NULL, NULL, NULL);
-					printf("    Penambahan berhasil dilakukan\n");
 				}
 			}
 		}
@@ -244,19 +220,14 @@ void addBottom(map *m, int Xpredessor, int Ypredessor){
 
 void addLeft(map *m, int Xpredessor, int Ypredessor){
 	if(m->in==NULL){
-		printf("!!! Peta masih kosong (tidak terdapat pixel predessor)\n");
 	}else{
 		if(Xpredessor == 0){
-			printf("!!! Tidak memungkinkan dilakukan penambahan di samping-kiri predessor\n");
 		}else{
 			if(search(*m,Xpredessor, Ypredessor)==NULL){
-				printf("!!! Predessor yang dimaksud tidak ada dalam peta\n");
 			}else{
 				if(search(*m,Xpredessor-1, Ypredessor)!=NULL){
-					printf("!!! Telah terdapat pixel di samping-kiri predessor\n");
 				}else{
 					search(*m,Xpredessor, Ypredessor)->left=createPixel(Xpredessor-1, Ypredessor, NULL, NULL, NULL, search(*m,Xpredessor, Ypredessor));
-					printf("    Penambahan berhasil dilakukan\n");
 				}
 			}
 		}
@@ -265,19 +236,14 @@ void addLeft(map *m, int Xpredessor, int Ypredessor){
 
 void addRight(map *m, int Xpredessor, int Ypredessor){
 	if(m->in==NULL){
-		printf("!!! Peta masih kosong (tidak terdapat pixel predessor)\n");
 	}else{
 		if(Xpredessor == m->length-1){
-			printf("!!! Tidak memungkinkan dilakukan penambahan di samping-kanan predessor\n");
 		}else{
 			if(search(*m,Xpredessor, Ypredessor)==NULL){
-				printf("!!! Predessor yang dimaksud tidak ada dalam peta\n");
 			}else{
 				if(search(*m,Xpredessor+1, Ypredessor)!=NULL){
-					printf("!!! Telah terdapat pixel di samping-kanan predessor\n");
 				}else{
 					search(*m,Xpredessor, Ypredessor)->right=createPixel(Xpredessor+1, Ypredessor, NULL, NULL, search(*m,Xpredessor, Ypredessor), NULL);
-					printf("    Penambahan berhasil dilakukan\n");
 				}
 			}
 		}
@@ -307,13 +273,10 @@ void deletePixel(map *m, int X, int Y){
 	address p;
 	p=search(*m, X, Y);
 	if(m->in==NULL){
-		printf("!!! Map kosong\n");
 	}else{
 		if(m->in->position.x == X && m->in->position.y == Y){
-			printf("!!! Dilarang menghapus pintu masuk\n");
 		}else{
 			if(p==NULL){
-				printf("!!! Pixel yang hendak dihapus tidak ada dalam map\n");
 			}else{
 				p->top=NULL;
 				p->bottom=NULL;
