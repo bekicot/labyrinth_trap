@@ -83,6 +83,7 @@ void connect(address a, address b);
 boolean isIntersection(address pixelX);
 boolean isEnd(list l, address pixelX); // pastikan pixelX tidak akan pernah NULL
 boolean isPassed(list l, address pixelX);
+address pixelSearch(list *sudahDilewati, address pixel, int x, int y);
 address search(map m, int X, int Y); // pastikan map tidak kosong
 void addTop(map *m, int Xpredessor, int Ypredessor);
 void addBottom(map *m, int Xpredessor, int Ypredessor);
@@ -92,4 +93,4 @@ void showMap(map *m);
 
 //mapCreator
 
-#endifq
+#endif

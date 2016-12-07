@@ -23,6 +23,7 @@ int main(){
 	scanf("%i",&Y);
 	createIn(&m, X, Y);
 	system("cls");
+	
 	//createIn
 	
 	//manually create map
@@ -51,6 +52,10 @@ int main(){
 		}
 		getch();
 		system("cls");
+	}
+	if(search(m, 1, 0)!=NULL){
+		printf("(%i,%i)",search(m, 1, 0)->position.x,search(m, 1, 0)->position.y);
+		getchar();
 	}
 	//manually create map
 	
