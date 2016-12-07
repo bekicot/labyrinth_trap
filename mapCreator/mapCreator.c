@@ -138,13 +138,13 @@ boolean isEnd(list l, address pixelX){
 		return true;
 	}else{
 		if(l.first==NULL){
-			if( (pixelX->top != NULL) || (pixelX->bottom != NULL) || (pixelX->left == NULL) || (pixelX->right == NULL) ){
+			if( (pixelX->top != NULL) || (pixelX->bottom != NULL) || (pixelX->left != NULL) || (pixelX->right != NULL) ){
 				return false;
 			}else{
 				return true;
 			}
 		}else{
-			if( (pixelX->top != NULL) || (pixelX->bottom != NULL) || (pixelX->left == NULL) || (pixelX->right == NULL) ){
+			if( (pixelX->top != NULL) || (pixelX->bottom != NULL) || (pixelX->left != NULL) || (pixelX->right != NULL) ){
 				if(pixelX->top != NULL){
 					if(searchList(l, pixelX->top)){
 						b1=true;
@@ -185,14 +185,138 @@ boolean isPassed(list l, address pixelX){
 address search(map m, int X, int Y){
 	address p=m.in;
 	list l;
-	stack s;
+	stack s;	
 	if(m.in==NULL){
-		return false;
+		return NULL;
 	}else{
-		while(p->position.x != X && p->position.y != Y){
-			add(&l, p);
-			
+		while(p!=NULL && p->position.x == X && p->position.y == Y){
+			if(isEnd(l, p)){
+				p=NULL;
+			}else{
+				if(p->top != NULL){
+					if(!searchList(l, p->top)){
+						p=p->top;
+					}else{
+						if(p->right != NULL){
+							if(!searchList(l, p->right)){
+								p=p->right;
+							}else{
+								if(p->bottom != NULL){
+									if(!searchList(l, p->bottom)){
+										p=p->bottom;
+									}else{
+										if(p->left != NULL){
+											if(!searchList(l, p->left)){
+												p=p->left;
+											}else{
+												p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+											}
+										}else{
+											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+										}
+									}
+								}else{
+									if(p->left != NULL){
+										if(!searchList(l, p->left)){
+											p=p->left;
+										}else{
+											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+										}
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}
+							}
+						}else{
+							if(p->bottom != NULL){
+								if(!searchList(l, p->bottom)){
+									p=p->bottom;
+								}else{
+									if(p->left != NULL){
+										if(!searchList(l, p->left)){
+											p=p->left;
+										}else{
+											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+										}
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}
+							}else{
+								if(p->left != NULL){
+									if(!searchList(l, p->left)){
+										p=p->left;
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}else{
+									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+								}
+							}
+						}
+					}
+				}else{
+					if(p->right != NULL){
+						if(!searchList(l, p->right)){
+							p=p->right;
+						}else{
+							if(p->bottom != NULL){
+								if(!searchList(l, p->bottom)){
+									p=p->bottom;
+								}else{
+									if(p->left != NULL){
+										if(!searchList(l, p->left)){
+											p=p->left;
+										}else{
+											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+										}
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}
+							}else{
+								if(p->left != NULL){
+									if(!searchList(l, p->left)){
+										p=p->left;
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}else{
+									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+								}
+							}
+						}
+					}else{
+						if(p->bottom != NULL){
+							if(!searchList(l, p->bottom)){
+								p=p->bottom;
+							}else{
+								if(p->left != NULL){
+									if(!searchList(l, p->left)){
+										p=p->left;
+									}else{
+										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+									}
+								}else{
+									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+								}
+							}
+						}else{
+							if(p->left != NULL){
+								if(!searchList(l, p->left)){
+									p=p->left;
+								}else{
+									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+								}
+							}else{
+								p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
+							}
+						}
+					}
+				}
+			}
 		}
+			return p;
 	}
 }
 
