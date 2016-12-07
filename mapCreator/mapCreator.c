@@ -183,142 +183,35 @@ boolean isPassed(list l, address pixelX){
 }
 
 address search(map m, int X, int Y){
-	address p=m.in;
 	list l;
-	stack s;	
-	if(m.in==NULL){
-		return NULL;
-	}else{
-		while(p!=NULL && p->position.x == X && p->position.y == Y){
-			if(isEnd(l, p)){
-				p=NULL;
-			}else{
-				if(p->top != NULL){
-					if(!searchList(l, p->top)){
-						p=p->top;
-					}else{
-						if(p->right != NULL){
-							if(!searchList(l, p->right)){
-								p=p->right;
-							}else{
-								if(p->bottom != NULL){
-									if(!searchList(l, p->bottom)){
-										p=p->bottom;
-									}else{
-										if(p->left != NULL){
-											if(!searchList(l, p->left)){
-												p=p->left;
-											}else{
-												p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-											}
-										}else{
-											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-										}
-									}
-								}else{
-									if(p->left != NULL){
-										if(!searchList(l, p->left)){
-											p=p->left;
-										}else{
-											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-										}
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}
-							}
-						}else{
-							if(p->bottom != NULL){
-								if(!searchList(l, p->bottom)){
-									p=p->bottom;
-								}else{
-									if(p->left != NULL){
-										if(!searchList(l, p->left)){
-											p=p->left;
-										}else{
-											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-										}
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}
-							}else{
-								if(p->left != NULL){
-									if(!searchList(l, p->left)){
-										p=p->left;
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}else{
-									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-								}
-							}
-						}
-					}
-				}else{
-					if(p->right != NULL){
-						if(!searchList(l, p->right)){
-							p=p->right;
-						}else{
-							if(p->bottom != NULL){
-								if(!searchList(l, p->bottom)){
-									p=p->bottom;
-								}else{
-									if(p->left != NULL){
-										if(!searchList(l, p->left)){
-											p=p->left;
-										}else{
-											p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-										}
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}
-							}else{
-								if(p->left != NULL){
-									if(!searchList(l, p->left)){
-										p=p->left;
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}else{
-									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-								}
-							}
-						}
-					}else{
-						if(p->bottom != NULL){
-							if(!searchList(l, p->bottom)){
-								p=p->bottom;
-							}else{
-								if(p->left != NULL){
-									if(!searchList(l, p->left)){
-										p=p->left;
-									}else{
-										p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-									}
-								}else{
-									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-								}
-							}
-						}else{
-							if(p->left != NULL){
-								if(!searchList(l, p->left)){
-									p=p->left;
-								}else{
-									p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-								}
-							}else{
-								p=NULL; //Top, right, bottom, left tidak ada atau tidak bisa dilalui
-							}
-						}
-					}
-				}
-			}
-		}
-			return p;
-	}
+	return pixelSearch(l, m.in, X, Y);
 }
+address pixelSearch(list *sudahDilewati, address pixel, int x, int y) {
+	if(searchList(sudahDilewati, pixel)){
+		return NULL;
+	}
+	add(sudahDilewati, pixel);
+	address pixelDiposisiXY = NULL;
+	if(pixel == NULL) {
+		return pixelDiposisiXY;
+	}
+	else if(pixel.x == x && pixel.y == y) {
+		return pixel;
+	} else {
+			pixelDiposisiXY = pixelSearch(sudahDilewati, pixel->atas, x, y);
+			if(pixelDiposisiXY == NULL) {
+				pixelDiposisiXY = pixelSearch(sudahDilewati, pixel->kanan, x, y);
+			}
+			if(pixelDiposisiXY == NULL) {
+				pixelDiposisiXY = pixelSearch(sudahDilewati, pixel->bawah, x, y);
+			}
+			if(pixelDiposisiXY == NULL) {
+				pixelDiposisiXY = pixelSearch(sudahDilewati, pixel->kiri, x, y);
+			}
+	}
+	return pixelDiposisiXY;
+}
+
 
 void addTop(map *m, int Xpredessor, int Ypredessor){
 	if(m->in==NULL){

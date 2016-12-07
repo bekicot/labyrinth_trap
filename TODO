@@ -1,0 +1,7 @@
+- Rubah peta jadi list jalur
+- tiap element dari list ada
+  right, left, top, bottom
+  exit => Exit menentukan goal dari game, kalo karakter di exit, pemain menang.
+  posisi => posisi dari peta
+  karakter:
+    - FacePosition => posisi karakter menghadap
