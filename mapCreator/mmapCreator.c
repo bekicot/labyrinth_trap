@@ -12,6 +12,7 @@ int main(){
 	printf("\nMasukkan lebar peta yang diinginkan : ");
 	scanf("%i",&widthX);
 	createEmptyMap(&m, lengthX, widthX);
+	getch();
 	system("cls");
 	//createEmptyMap
 	
@@ -22,6 +23,7 @@ int main(){
 	printf("\nMasukkan koordinat (y) untuk pintu masuk : ");
 	scanf("%i",&Y);
 	createIn(&m, X, Y);
+	getch();
 	system("cls");
 	
 	//createIn
@@ -67,7 +69,7 @@ int main(){
 		scanf("%i",&xa);
 		printf("\nMasukkan koordinat (y) pixel-a : ");
 		scanf("%i",&ya);
-		printf("Masukkan koordinat (x) pixel-b : ");
+		printf("\nMasukkan koordinat (x) pixel-b : ");
 		scanf("%i",&xb);
 		printf("\nMasukkan koordinat (y) pixel-b : ");
 		scanf("%i",&yb);
@@ -90,6 +92,7 @@ int main(){
 	printf("\nMasukkan koordinat (y) pixel pintu keluar : ");
 	scanf("%i",&Y);
 	setOut(&m, search(m, X, Y));
+	getch();
 	system("cls");
 	//setOut
 	

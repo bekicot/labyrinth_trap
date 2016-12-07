@@ -90,6 +90,7 @@ void addBottom(map *m, int Xpredessor, int Ypredessor);
 void addLeft(map *m, int Xpredessor, int Ypredessor);
 void addRight(map *m, int Xpredessor, int Ypredessor);
 void showMap(map *m);
+void deletePixel(map *m, int X, int Y);
 
 //mapCreator
 
